@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -18,71 +18,126 @@
 
 <body>
     <div id=navheader>
-        <div class="wrapper" style="position:fixed;">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="https://github.com/stevenbowler">Steven Bowler</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+        <!-- <div class="wrapper" style="position:fixed;"> -->
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="https://github.com/stevenbowler">Word Guess Game</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html">Home<span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html">Home<span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html">Unused</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html">Unused</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Gimme 5 Then ...</a>
-                                <a class="dropdown-item" href="#">Gimme Another 5</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">And Another 10</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://github.com/stevenbowler/Word-Guess-Game" tabindex="-1"
-                                aria-disabled="true">Github</a>
-                        </li>
-                    </ul>
-                    <!-- https://github.com/stevenbowler/Responsive-Portfolio/search?q=navbar&unscoped_q=navbar -->
-                    <form id="googleSearchForm" class="form-inline my-2 my-lg-0" target="blank"
-                        action="https://github.com/stevenbowler/Word-Guess-Game/search?">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search Repository"
-                            aria-label="Search" id="googlesearch" name="q">
-                        <button class="btn btn-outline-success my-2 my-sm-0" onclick="search()" type="submit"
-                            id="searchButton">Search</button>
-                    </form>
-                </div>
-            </nav>
-        </div>
-
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" roll="button" onclick="restart()">Start Game</a>
+                    </li>
+                    <!-- <li class="nav-item dropdown"> -->
+                    <li class="nav-item">
+                        <a class="nav-link" roll="button" onclick="restart()">Unused</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Gimme 5 Then ...</a>
+                            <a class="dropdown-item" href="#">Gimme Another 5</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">And Another 10</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/stevenbowler/Word-Guess-Game" tabindex="-1"
+                            aria-disabled="true">Github Repo</a>
+                    </li>
+                </ul>
+                <!-- https://github.com/stevenbowler/Responsive-Portfolio/search?q=navbar&unscoped_q=navbar -->
+                <form id="googleSearchForm" class="form-inline my-2 my-lg-0" target="blank"
+                    action="https://github.com/stevenbowler/Word-Guess-Game/search?">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search Repository"
+                        aria-label="Search" id="googlesearch" name="q">
+                    <button class="btn btn-outline-success my-2 my-sm-0" onclick="search()" type="submit"
+                        id="searchButton">Search</button>
+                </form>
+            </div>
+        </nav>
+        <!-- </div> -->
     </div>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
-    <!-- <script>$("#navheader").load("./assets/includes/navheader.html"); </script> -->
-    <script src="./assets/javascript/game.js"></script>
+    <!-- 
+    <div class="container">
+        <div class="row justify-content-start">
+            <div class="col-sm">
+                <h1>Heading</h1>
+            </div>
+
+
+        </div>
+    </div> -->
+
+    <section>
+        <div class="container" style="margin-top:56px;">
+            <div class="row justify-content-start">
+
+                <div class="col-sm text-light" style="background-color: blue;" id="composerVideo">
+                    <img id="composerPhoto" height="200px" src="./assets/img/bach.jpeg"
+                        alt="Click Start Game and guess the name of the composer that appears here"
+                        transition-duration="2s">
+                </div>
+
+
+                <div class="col-sm" style="background-color: green;" id=gameField>
+                    <img id="hangmanPhoto" src="./assets/img/hangmanOuch.png" height="200px" alt="no photo found"
+                        transition-duration="2s">
+                </div>
+
+                <div class="col-sm" style="background-color: blue;" id="gameStatus">
+                    <form>
+                        <div class="form-group">
+                            <label for="composerName"></label>
+                            <small id="composerHelp" class="form-text text-light">Take your best
+                                shot </small>
+                            <input type="name" placeholder="Composer Name" class="form-control" id="composerName"
+                                oninput="searchName()" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="gameScore" class="text-light">Game Score</label>
+                            <input type="text" class="form-control" id="gameScore" autocomplete="off">
+                        </div>
+                    </form>
+                    <button type="submit" onclick="restart()" class="btn btn-primary">Start Game</button>
+                </div>
+
+
+                <div class="col-sm" bg-light id=composerClues>
+                    Click <strong>Start Game</strong> guess composer's name.<br>
+                    You have 30 seconds to live.<br>
+                    Or, get hung with 11 bad guesses.<br>
+                    Whichever comes first.<br>
+                    You will be provided additional clues.<br>
+                    But more clues used, means a lower final score.
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
 </body>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+<!-- <script>$("#navheader").load("./assets/includes/navheader.html"); </script> -->
+<script src="./assets/javascript/game.js"></script>
 
 </html>
