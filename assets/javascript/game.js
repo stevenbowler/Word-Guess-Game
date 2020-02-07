@@ -1,25 +1,19 @@
-//import { composer } from './composerObject';
-//const composer = require('./composerObject');
-
-
 const composerNames = ["beethoven", "mozart", "bach", "wagner", "haydn", "brahms", "schubert", "schumann", "debussy", "handel", "vivaldi", "chopin", "dvorak", "mendelssohn", "stravinsky", "verdi", "strauss"];
 const maxCharacters = 11;
 const gameStartScore = 500;
-const bach = '<iframe width="956" height="538" src="https://www.youtube.com/embed/EVhpYlyeyik" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
 var characterCount = 0;
 var gameScore = gameStartScore;
 var hints = 5;
 var gameOn = true;
 var restartYes = false;
 var gameComposer = "unknown";
-//var composerArray = Array composer;
 
-// called from user input each time oninput each time user touches key
+
+// called from user input each time oninput each time user touches key   tieStr.indexOf(caseCompare)
 searchName = () => {
     userInput = document.getElementById("composerName").value.toLowerCase();
     console.log("userInput: ", userInput, " gameComposer: ", gameComposer);
     if (!gameOn) { restart(); return; } //restartYes = confirm("do you want to restart? "); 
-    //if (restartYes) 
     if (userInput === gameComposer) handleSuccess();
     else handleInterim();
 }
@@ -28,15 +22,17 @@ searchName = () => {
 handleSuccess = () => {
     document.getElementById("composerHelp").innerHTML = "success";
     document.getElementById("hangmanPhoto").src = "./assets/img/hangmanSuccess.png";
-    //playVideo();
-    //document.getElementById("gameScore").focus();
     clearInterval(timerID);
+    playVideo();
+    //document.getElementById("gameScore").focus();
     gameOn = false;
 
 }
 
 playVideo = () => {
-    document.getElementById("composerVideo").innerHTML = bach;
+
+    document.getElementById("composerClues").innerHTML = gameComposerVideo;
+
 }
 
 // called from searchName when oninput with each keystroke but composerName not found yet
@@ -89,42 +85,23 @@ updateScore = () => {
     if (gameScore <= 0) handleFailure();
 }
 
-
 // called from restart() to update the image of the hangman
 updateHangman = (count) => {
     if (count >= maxCharacters) handleFailure();
     else {
         imageURL = "./assets/img/hangman" + count.toString() + ".png";
-        console.log(imageURL);
+        //console.log(imageURL);
         document.getElementById("hangmanPhoto").src = imageURL;
     }
-
 }
 
 // called from restart to choose a new composer from the array of 15 composers
 chooseComposer = () => {
     composerIndex = parseInt(Math.random() * 17);
-    console.log(composerNames[composerIndex]);
-    gameComposer = composerNames[composerIndex];
+    console.log("random choice of Composer:  ", composerArray[composerIndex].lastName);
+    gameComposer = composerArray[composerIndex].lastName;
+    gameComposerVideo = composerArray[composerIndex].video;
+    //console.log("random choice of Composer video:  ", composerArray[composerIndex].video);
     document.getElementById("composerPhoto").src = "./assets/img/" + gameComposer + ".jpeg";
 }
 
-
-// switch (direction) {
-//     case "right": if (newPosition >= parsePX(this.state.width)) return currentPosition; break;
-//     case "left": if (newPosition <= 0) return "0px"; break;
-//     case "up": if (newPosition <= 0) return "0px"; break;
-//     case "down": if (newPosition >= parsePX(this.state.height)) return currentPosition; break;
-//     default: break;
-//   }
-// if (!this.props.gameOn && this.timerOn) {
-//     clearInterval(this.timerID);
-//     this.timerOn = false;
-// }
-
-// if (this.props.gameOn && !this.timerOn) {
-//     this.timerID = setInterval(
-//         () => this.setLocation(),
-//         1000);
-//     this.timerOn = true;
-// }
