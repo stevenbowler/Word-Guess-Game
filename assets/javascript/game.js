@@ -91,6 +91,9 @@ updateHangman = (count) => {
     else {
         imageURL = "./assets/img/hangman" + count.toString() + ".png";
         //console.log(imageURL);
+        // $("#hangmanPhoto").animate({
+        //     src: imageURL
+        // });
         document.getElementById("hangmanPhoto").src = imageURL;
     }
 }

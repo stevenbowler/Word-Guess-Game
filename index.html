@@ -73,22 +73,25 @@
             <div class="row justify-content-start">
 
                 <div class="col-sm text-light" style="background-color: blue;" id="composerVideo">
-                    <img id="composerPhoto" height="200px" src="./assets/img/bach.jpeg"
+                    <img id="composerPhoto" src="./assets/img/bach.jpeg"
                         alt="Click Start Game and guess the name of the composer that appears here"
-                        transition-duration="2s">
+                        transition-duration="2s" class="center">
                 </div>
 
                 <div class="col-sm" style="background-color: green;" id=gameField>
-                    <img id="hangmanPhoto" src="./assets/img/hangmanOuch.png" height="200px" alt="no photo found"
-                        transition-duration="2s">
+                    <img id="hangmanPhoto" src="./assets/img/hangmanOuch.png" alt="no photo found"
+                        transition-duration="2s" class="center">
                 </div>
-
+            </div>
+            <div class="row justify-content-start">
                 <div class="col-sm" style="background-color: blue;" id="gameStatus">
                     <form>
                         <div class="form-group">
                             <label for="composerName"></label>
-                            <small id="composerHelp" class="form-text text-light">Take your best
-                                shot </small>
+                            <strong>
+                                <large id="composerHelp" class="form-text text-light">Take your best
+                                    shot </large>
+                            </strong>
                             <input type="name" placeholder="Composer Name" class="form-control" id="composerName"
                                 oninput="searchName()" autocomplete="off">
                         </div>
@@ -100,7 +103,7 @@
                     <button type="submit" onclick="restart()" class="btn btn-primary">Start Game</button>
                 </div>
 
-                <div class="col-sm" bg-light id=composerClues>
+                <div class="col-sm" bg-light id=composerClues class="center">
                     Click <strong>Start Game</strong> guess composer's name.<br>
                     You have 30 seconds to live.<br>
                     Or, get hung with 11 bad guesses.<br>
@@ -108,8 +111,8 @@
                     You will be provided additional clues.<br>
                     But more clues used, means a lower final score.
                 </div>
-
             </div>
+
         </div>
     </section>
 
