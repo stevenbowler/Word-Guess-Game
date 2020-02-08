@@ -34,11 +34,11 @@ handleInterim = () => {
     updateHangman(characterCount);
 
     switch (characterCount) {
-        case 1: composerHelp.innerHTML = "Composer name has " + gameComposer.length + " letters."; break;
-        case 2: composerHelp.innerHTML = "Composer name hint: " + middleString(gameComposer.length - 1) + gameComposer.slice(-1); break;
-        case 3: composerHelp.innerHTML = "Composer name hint: " + gameComposer.slice(0, 1) + middleString(gameComposer.length - 2) + gameComposer.slice(-1); break;
-        case 4: composerHelp.innerHTML = "Composer name hint: " + gameComposer.slice(0, 1) + middleString(gameComposer.length - 3) + gameComposer.slice(-2); break;
-        case 5: composerHelp.innerHTML = "Composer name hint: " + gameComposer.slice(0, 2) + middleString(gameComposer.length - 4) + gameComposer.slice(-2); break;
+        case 1: composerHelp.innerHTML = "Hint: " + gameComposer.length + " letters."; break;
+        case 2: composerHelp.innerHTML = "Hint: " + middleString(gameComposer.length - 1) + gameComposer.slice(-1); break;
+        case 3: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 1) + middleString(gameComposer.length - 2) + gameComposer.slice(-1); break;
+        case 4: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 1) + middleString(gameComposer.length - 3) + gameComposer.slice(-2); break;
+        case 5: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 2) + middleString(gameComposer.length - 4) + gameComposer.slice(-2); break;
         default: break;
     }
     if (characterCount >= 11) handleFailure();
@@ -46,7 +46,7 @@ handleInterim = () => {
 
 middleString = (stringLength) => {
     underscoreString = "";
-    for (i = 0; i < stringLength; ++i) underscoreString = underscoreString + "_";
+    for (i = 0; i < stringLength; ++i) underscoreString = underscoreString + " _";
     return (underscoreString);
 }
 
