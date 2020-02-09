@@ -27,6 +27,27 @@ playVideo = () => {
 
 }
 
+function animateCSS(element, animationName, callback) {
+    const node = document.querySelector(element)
+    node.classList.add('animated', animationName)
+
+    function handleAnimationEnd() {
+        node.classList.remove('animated', animationName)
+        node.removeEventListener('animationend', handleAnimationEnd)
+
+        if (typeof callback === 'function') callback()
+    }
+
+    node.addEventListener('animationend', handleAnimationEnd)
+}
+
+// animateCSS('.my-element', 'bounce')
+
+// // or
+// animateCSS('.my-element', 'bounce', function() {
+//   // Do something after animation
+// })
+
 // called from searchName when oninput with each keystroke but composerName not found yet
 handleInterim = () => {
     composerHelp.innerHTML = "nice try, not yet";
@@ -58,6 +79,7 @@ handleFailure = () => {
     gameOn = false;
     composerHelp.innerHTML = "Sorry, you blew it, that's gotta hurt";
     hangmanPhoto.src = "./assets/img/hangmanOuch.png"
+    animateCSS('#hangmanPhoto', 'shake');
 }
 
 // called from 3 places: navbar start, start game button, or from composerName field oninput after success
@@ -92,11 +114,8 @@ updateHangman = (count) => {
     if (count >= maxCharacters) handleFailure();
     else {
         imageURL = "./assets/img/hangman" + count.toString() + ".png";
-        //console.log(imageURL);
-        // $("#hangmanPhoto").animate({
-        //     src: imageURL
-        // });
         hangmanPhoto.src = imageURL;
+        animateCSS('#hangmanPhoto', 'bounce');
     }
 }
 
@@ -108,5 +127,6 @@ chooseComposer = () => {
     gameComposerVideo = composerArray[composerIndex].video;
     //console.log("random choice of Composer video:  ", composerArray[composerIndex].video);
     composerPhoto.src = "./assets/img/" + gameComposer + ".jpeg";
+    animateCSS('#composerPhoto', 'zoomInLeft');
 }
 
