@@ -81,7 +81,7 @@ handleFailure = () => {
     gameScore = 0;
     clearInterval(timerID);
     gameOn = false;
-    composerHelp.innerHTML = "Sorry, you blew it, that's gotta hurt";
+    composerHelp.innerHTML = "Sorry, you blew it, it was: " + gameComposer.charAt(0).toUpperCase() + gameComposer.slice(1);  //str.charAt(0).toUpperCase() + str.slice(1);
     hangmanPhoto.src = "./assets/img/hangmanOuch.png"
     animateCSS('#hangmanPhoto', 'shake');
 }
@@ -121,7 +121,7 @@ updateHangman = (count) => {
     else {
         imageURL = "./assets/img/hangman" + count.toString() + ".png";
         hangmanPhoto.src = imageURL;
-        animateCSS('#hangmanPhoto', 'bounce');
+        animateCSS('#hangmanPhoto', 'headShake');
     }
 }
 
