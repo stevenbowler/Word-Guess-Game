@@ -45,25 +45,25 @@ animateCSS = (element, animationName, callback) => {
     node.addEventListener('animationend', handleAnimationEnd)
 }
 
-// animateCSS('.my-element', 'bounce')
-
-// // or
-// animateCSS('.my-element', 'bounce', function() {
-//   // Do something after animation
-// })
 
 // called from searchName when oninput with each keystroke but composerName not found yet
 handleInterim = () => {
-    composerHelp.innerHTML = "nice try, not yet";
+
     ++characterCount;
     updateHangman(characterCount);
 
     switch (characterCount) {
-        case 1: composerHelp.innerHTML = "Hint: " + gameComposer.length + " letters."; break;
+        case 1: composerHelp.innerHTML = "Hint: Composer name has " + gameComposer.length + " letters."; break;
         case 2: composerHelp.innerHTML = "Hint: " + middleString(gameComposer.length - 1) + gameComposer.slice(-1); break;
         case 3: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 1) + middleString(gameComposer.length - 2) + gameComposer.slice(-1); break;
         case 4: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 1) + middleString(gameComposer.length - 3) + gameComposer.slice(-2); break;
         case 5: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 2) + middleString(gameComposer.length - 4) + gameComposer.slice(-2); break;
+        case 6: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 2) + middleString(gameComposer.length - 4) + gameComposer.slice(-2) + " 5 guesses left"; break;
+        case 7: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 2) + middleString(gameComposer.length - 4) + gameComposer.slice(-2) + " 4 guesses left"; break;
+        case 8: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 2) + middleString(gameComposer.length - 4) + gameComposer.slice(-2) + " 3 guesses left"; break;
+        case 8: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 2) + middleString(gameComposer.length - 4) + gameComposer.slice(-2) + " 2 guesses left"; break;
+        case 10: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 2) + middleString(gameComposer.length - 4) + gameComposer.slice(-2) + " 1 guesses left"; break;
+        case 11: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 2) + middleString(gameComposer.length - 4) + gameComposer.slice(-2); break;
         default: break;
     }
     if (characterCount >= 11) handleFailure();
@@ -86,6 +86,7 @@ handleFailure = () => {
     animateCSS('#hangmanPhoto', 'shake');
 }
 
+
 // called from 3 places: navbar start, start game button, or from composerName field oninput after success
 restart = () => {
     gameOn = true;
@@ -105,6 +106,7 @@ restart = () => {
     console.log("restart");
 }
 
+
 // called from the one second timerID within restart()
 updateScore = () => {
     if (characterCount == 0) gameScore = gameScore - hints;
@@ -115,13 +117,22 @@ updateScore = () => {
     if (gameScore <= 0) handleFailure();
 }
 
+
 // called from restart() to update the image of the hangman
 updateHangman = (count) => {
     if (count >= maxCharacters) handleFailure();
     else {
         imageURL = "./assets/img/hangman" + count.toString() + ".png";
-        hangmanPhoto.src = imageURL;
-        animateCSS('#hangmanPhoto', 'headShake');
+        // if restart then zoom out old zoom in new
+        if (count == 0) animateCSS('#hangmanPhoto', 'zoomOutLeft', function () {
+            hangmanPhoto.src = imageURL;
+            animateCSS('#hangmanPhoto', 'zoomInRight');
+        });
+        // else regular game processing, change from hangmanPhoto n-1 to hangmanPhoto n
+        else {
+            hangmanPhoto.src = imageURL;
+            animateCSS('#hangmanPhoto', 'headShake');
+        }
     }
 }
 
@@ -132,7 +143,9 @@ chooseComposer = () => {
     gameComposer = composerArray[composerIndex].lastName;
     gameComposerVideo = composerArray[composerIndex].video;
     //console.log("random choice of Composer video:  ", composerArray[composerIndex].video);
-    composerPhoto.src = "./assets/img/" + gameComposer + ".jpeg";
-    animateCSS('#composerPhoto', 'zoomInLeft');
+    animateCSS('#composerPhoto', 'zoomOutRight', function () {
+        composerPhoto.src = "./assets/img/" + gameComposer + ".jpeg";
+        animateCSS('#composerPhoto', 'zoomInLeft')
+    });
 }
 
