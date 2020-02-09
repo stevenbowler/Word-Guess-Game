@@ -1,3 +1,9 @@
+//playAudio();
+
+
+//document.getElementsByTagName("body").addEventListener("load", playAudio());
+
+// document.getElementById("gameStatus").addEventListener("load", playAudio());
 
 // called from user input each time oninput each time user touches key   tieStr.indexOf(caseCompare)
 searchName = () => {
@@ -23,6 +29,13 @@ handleSuccess = () => {
 
 }
 
+playAudio = () => {
+    composerAudio.play();
+}
+
+pauseAudio = () => {
+    composerAudio.pause();
+}
 
 playVideo = () => {
     composerClues.innerHTML = gameComposerVideo;
@@ -44,6 +57,8 @@ animateCSS = (element, animationName, callback) => {
 
     node.addEventListener('animationend', handleAnimationEnd)
 }
+
+
 
 
 // called from searchName when oninput with each keystroke but composerName not found yet
@@ -147,5 +162,8 @@ chooseComposer = () => {
         composerPhoto.src = "./assets/img/" + gameComposer + ".jpeg";
         animateCSS('#composerPhoto', 'zoomInRight')
     });
+    //composerAudio.src = "./assets/audio/" + "debussy" + ".mp3";
+    composerAudio.src = "./assets/audio/" + gameComposer + ".mp3";
+    playAudio();
 }
 

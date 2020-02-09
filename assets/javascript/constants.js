@@ -16,6 +16,8 @@ const composerHelp = document.getElementById("composerHelp");
 const hangmanPhoto = document.getElementById("hangmanPhoto");
 const composerClues = document.getElementById("composerClues");
 const gameScoreId = document.getElementById("gameScore");
+const composerAudio = document.getElementById("composerAudio");
+
 const backSpace = 8;
 
 var characterCount = 0;

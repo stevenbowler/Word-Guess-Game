@@ -37,7 +37,7 @@
                     </li>
                     <!-- <li class="nav-item dropdown"> -->
                     <li class="nav-item">
-                        <a class="nav-link" roll="button" onclick="restart()">Unused</a>
+                        <a class="nav-link" roll="button" href="index.html">Game Tutorial</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -95,7 +95,7 @@
                                 <large id="composerHelp" class="form-text text-light">Take your best
                                     shot </large>
                             </strong>
-                            <input type="name" placeholder="Composer Name" class="form-control" id="composerName"
+                            <input type="name" placeholder="Guess Composer Name" class="form-control" id="composerName"
                                 oninput="searchName()" autocomplete="off">
                         </div>
                         <div class="form-group">
@@ -108,8 +108,22 @@
                             </div>
                         </div>
                     </form>
+                    <!-- don't know how to get it to play music on load tried this:  onload="playAudio()" -->
+                    <audio src="./assets/audio/BachPartitas.mp3" type="audio/mpeg" id="composerAudio"
+                        autoplay="autoplay" loop="loop">
+                        <!-- <source src="horse.ogg" type="audio/ogg"> -->
+                        <!-- <source src="./assets/audio/BachPartitas.mp3" type="audio/mpeg"> -->
+                        Your browser does not support the audio element.
+                    </audio>
                     <button type="submit" onclick="restart()" style="margin-bottom: 10px;" class="btn btn-primary">Start
                         Game</button>
+                    <button type="submit" onclick="playAudio()" style="margin-bottom: 10px;"
+                        class="btn btn-primary">Play
+                        Music</button>
+                    <button type="submit" onclick="pauseAudio()" style="margin-bottom: 10px;"
+                        class="btn btn-primary">Pause
+                        Music</button>
+
                 </div>
 
                 <div class="col-sm text-light animated zoomInRight delay-0s " style="background-color: black;"
