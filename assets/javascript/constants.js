@@ -1,6 +1,13 @@
 const composerNames = ["beethoven", "mozart", "bach", "wagner", "haydn", "brahms", "schubert", "schumann", "debussy", "handel", "vivaldi", "chopin", "dvorak", "mendelssohn", "stravinsky", "verdi", "strauss"];
 const maxCharacters = 11;
 const gameStartScore = 500;
+const gameInstructions =
+    "Click <strong>Start Game</strong> guess composer's name.  " +
+    "You have 30 seconds to live. " +
+    "Or, get hung with 11 bad guesses. " +
+    "Whichever comes first. " +
+    "You will be provided additional clues. " +
+    "But more clues and time used, means a lower final score.";
 
 // form fields accessed
 const composerName = document.getElementById("composerName");

@@ -3,17 +3,19 @@
 searchName = () => {
     userInput = composerName.value.toLowerCase();
     if (!gameOn) { restart(); return; } //after success, any next keystroke restarts game. 
-    if (userInput.length < previousUserInputLength) return; // if deleting chars don't update hangman
+    if (userInput.length < previousUserInputLength) { --previousUserInputLength; return; }// if deleting chars don't update hangman
     else previousUserInputLength = userInput.length;
     console.log("userInput: ", userInput, " gameComposer: ", gameComposer);
     if (userInput === gameComposer) handleSuccess();
     else handleInterim();
 }
 
+
 // called from searchName when match to composerName is found
 handleSuccess = () => {
-    composerHelp.innerHTML = "success";
+    composerHelp.innerHTML = "SUCCESS ... GREAT WORK!";
     hangmanPhoto.src = "./assets/img/hangmanSuccess.png";
+    animateCSS('#hangmanPhoto', 'tada');
     clearInterval(timerID);
     playVideo();
     //document.getElementById("gameScore").focus();
@@ -21,13 +23,15 @@ handleSuccess = () => {
 
 }
 
+
 playVideo = () => {
-
     composerClues.innerHTML = gameComposerVideo;
-
+    animateCSS('#composerClues', 'zoomInRight');
 }
 
-function animateCSS(element, animationName, callback) {
+
+// from GitHub animate.css library
+animateCSS = (element, animationName, callback) => {
     const node = document.querySelector(element)
     node.classList.add('animated', animationName)
 
@@ -91,6 +95,8 @@ restart = () => {
     chooseComposer();
     composerName.value = "";
     composerHelp.innerHTML = "Take your best shot";
+    composerClues.innerHTML = gameInstructions;
+    animateCSS('#composerClues', 'zoomInRight');
     composerName.focus();
     gameScore = gameStartScore;
     timerID = setInterval(
