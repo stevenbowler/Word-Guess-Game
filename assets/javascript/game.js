@@ -126,7 +126,7 @@ updateHangman = (count) => {
         // if restart then zoom out old zoom in new
         if (count == 0) animateCSS('#hangmanPhoto', 'zoomOutLeft', function () {
             hangmanPhoto.src = imageURL;
-            animateCSS('#hangmanPhoto', 'zoomInRight');
+            animateCSS('#hangmanPhoto', 'zoomInLeft');
         });
         // else regular game processing, change from hangmanPhoto n-1 to hangmanPhoto n
         else {
@@ -145,7 +145,7 @@ chooseComposer = () => {
     //console.log("random choice of Composer video:  ", composerArray[composerIndex].video);
     animateCSS('#composerPhoto', 'zoomOutRight', function () {
         composerPhoto.src = "./assets/img/" + gameComposer + ".jpeg";
-        animateCSS('#composerPhoto', 'zoomInLeft')
+        animateCSS('#composerPhoto', 'zoomInRight')
     });
 }
 
