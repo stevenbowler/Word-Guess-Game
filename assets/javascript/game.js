@@ -12,8 +12,9 @@ searchName = () => {
     if (userInput.length < previousUserInputLength) { --previousUserInputLength; return; }// if deleting chars don't update hangman
     else previousUserInputLength = userInput.length;
     console.log("userInput: ", userInput, " gameComposer: ", gameComposer);
+    console.log("call to handleInterim userInput: ", userInput.slice(-1));
     if (userInput === gameComposer) handleSuccess();
-    else handleInterim();
+    else handleInterim(userInput);
 }
 
 
@@ -23,73 +24,63 @@ handleSuccess = () => {
     hangmanPhoto.src = "./assets/img/hangmanSuccess.png";
     animateCSS('#hangmanPhoto', 'tada');
     clearInterval(timerID);
+    pauseAudio();
     playVideo();
     //document.getElementById("gameScore").focus();
     gameOn = false;
 
 }
 
-playAudio = () => {
-    composerAudio.play();
-}
-
-pauseAudio = () => {
-    composerAudio.pause();
-}
-
-playVideo = () => {
-    composerClues.innerHTML = gameComposerVideo;
-    animateCSS('#composerClues', 'zoomInRight');
-}
-
-
-// from GitHub animate.css library
-animateCSS = (element, animationName, callback) => {
-    const node = document.querySelector(element)
-    node.classList.add('animated', animationName)
-
-    function handleAnimationEnd() {
-        node.classList.remove('animated', animationName)
-        node.removeEventListener('animationend', handleAnimationEnd)
-
-        if (typeof callback === 'function') callback()
-    }
-
-    node.addEventListener('animationend', handleAnimationEnd)
-}
-
 
 
 
 // called from searchName when oninput with each keystroke but composerName not found yet
-handleInterim = () => {
-
-    ++characterCount;
-    updateHangman(characterCount);
+handleInterim = (userInput) => {
+    console.log("handleInterim userInput: ", userInput.slice(-1), "index = -1?: ", gameComposer.indexOf(userInput.slice(-1)));
+    if (gameComposer.indexOf(userInput.slice(-1)) >= 0) {
+        composerNameGuess = handleGoodCharacter(composerNameGuess, gameComposer.indexOf(userInput.slice(-1)), userInput.slice(-1));
+        console.log("composerNameGuess: ", composerNameGuess);
+        //return;
+    } else {// if char not in composerName
+        notInComposerName = notInComposerName + userInput.slice(-1);
+        ++characterCount;
+        updateHangman(characterCount);
+    }
 
     switch (characterCount) {
-        case 1: composerHelp.innerHTML = "Hint: Composer name has " + gameComposer.length + " letters."; break;
-        case 2: composerHelp.innerHTML = "Hint: " + middleString(gameComposer.length - 1) + gameComposer.slice(-1); break;
-        case 3: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 1) + middleString(gameComposer.length - 2) + gameComposer.slice(-1); break;
-        case 4: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 1) + middleString(gameComposer.length - 3) + gameComposer.slice(-2); break;
-        case 5: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 2) + middleString(gameComposer.length - 4) + gameComposer.slice(-2); break;
-        case 6: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 2) + middleString(gameComposer.length - 4) + gameComposer.slice(-2) + " 5 guesses left"; break;
-        case 7: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 2) + middleString(gameComposer.length - 4) + gameComposer.slice(-2) + " 4 guesses left"; break;
-        case 8: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 2) + middleString(gameComposer.length - 4) + gameComposer.slice(-2) + " 3 guesses left"; break;
-        case 8: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 2) + middleString(gameComposer.length - 4) + gameComposer.slice(-2) + " 2 guesses left"; break;
-        case 10: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 2) + middleString(gameComposer.length - 4) + gameComposer.slice(-2) + " 1 guesses left"; break;
-        case 11: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 2) + middleString(gameComposer.length - 4) + gameComposer.slice(-2); break;
+        case 0: composerHelp.innerHTML = "Hint: " + composerNameGuess; break;
+        case 1: composerHelp.innerHTML = "Hint: " + composerNameGuess; break;
+        case 2: composerHelp.innerHTML = "Hint: " + composerNameGuess.substr(0, gameComposer.length - 1) + gameComposer.slice(-1); break;
+        case 3: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 1) + composerNameGuess.substr(1, composerNameGuess.length - 2) + gameComposer.slice(-1); break;
+        case 4: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 1) + composerNameGuess.substr(1, composerNameGuess.length - 3) + gameComposer.slice(-2); break;
+        case 5: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 2) + composerNameGuess.substr(2, composerNameGuess.length - 4) + gameComposer.slice(-2); break;
+        case 6: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 2) + composerNameGuess.substr(2, composerNameGuess.length - 4) + gameComposer.slice(-2) + " 5 guesses left"; break;
+        case 7: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 2) + composerNameGuess.substr(2, composerNameGuess.length - 4) + gameComposer.slice(-2) + " 4 guesses left"; break;
+        case 8: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 2) + composerNameGuess.substr(2, composerNameGuess.length - 4) + gameComposer.slice(-2) + " 3 guesses left"; break;
+        case 8: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 2) + composerNameGuess.substr(2, composerNameGuess.length - 4) + gameComposer.slice(-2) + " 2 guesses left"; break;
+        case 10: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 2) + composerNameGuess.substr(2, composerNameGuess.length - 4) + gameComposer.slice(-2) + " 1 guesses left"; break;
+        case 11: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 2) + composerNameGuess.substr(2, composerNameGuess.length - 4) + gameComposer.slice(-2); break;
         default: break;
     }
+    if (notInComposerName !== "") composerHelp.innerHTML = composerHelp.innerHTML + "  Not in Composer name: " + notInComposerName;
     if (characterCount >= 11) handleFailure();
 }
 
+
 middleString = (stringLength) => {
     underscoreString = "";
-    for (i = 0; i < stringLength; ++i) underscoreString = underscoreString + " _";
+    for (i = 0; i < stringLength; ++i) underscoreString = underscoreString + "_";
     return (underscoreString);
 }
 
+handleGoodCharacter = (str, index, chr) => {
+    if (index > str.length - 1) return str;
+    return str.substr(0, index) + chr + str.substr(index + 1);
+}
+
+// handleGoodCharacter = (char) => {
+//     composerNameGuess[gameComposer.indexOf(char)] = char;
+// }
 
 //clean up if failed to either guess in 11 characters or finish in time before score/timer gets to zero
 handleFailure = () => {
@@ -109,6 +100,8 @@ restart = () => {
     previousUserInputLength = 0;
     updateHangman(characterCount);
     chooseComposer();
+    notInComposerName = "";
+    composerNameGuess = middleString(gameComposer.length);
     composerName.value = "";
     composerHelp.innerHTML = "Take your best shot";
     composerClues.innerHTML = gameInstructions;
@@ -167,3 +160,32 @@ chooseComposer = () => {
     playAudio();
 }
 
+
+playAudio = () => {
+    composerAudio.play();
+}
+
+pauseAudio = () => {
+    composerAudio.pause();
+}
+
+playVideo = () => {
+    composerClues.innerHTML = gameComposerVideo;
+    animateCSS('#composerClues', 'zoomInRight');
+}
+
+
+// from GitHub animate.css library
+animateCSS = (element, animationName, callback) => {
+    const node = document.querySelector(element)
+    node.classList.add('animated', animationName)
+
+    function handleAnimationEnd() {
+        node.classList.remove('animated', animationName)
+        node.removeEventListener('animationend', handleAnimationEnd)
+
+        if (typeof callback === 'function') callback()
+    }
+
+    node.addEventListener('animationend', handleAnimationEnd)
+}

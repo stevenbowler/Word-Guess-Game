@@ -75,21 +75,21 @@
         <div class="container" style="margin-top:56px; background-color: black; ">
             <div class="row justify-content-start">
 
-                <div class="col-sm text-light animated zoomInLeft delay-0s" style="background-color: black;"
+                <div class="col-sm text-light animated zoomInRight delay-0s" style="background-color: black;"
                     id="composerVideo">
                     <img id="composerPhoto" max-height="300px" src="./assets/img/bach.jpeg"
                         alt="Click Start Game and guess the name of the composer that appears here"
                         transition-duration="2s" class="center">
                 </div>
 
-                <div class="col-sm animated zoomInRight delay-0s" style="background-color: black;" id=gameField>
+                <div class="col-sm animated zoomInLeft delay-0s" style="background-color: black;" id=gameField>
                     <img id="hangmanPhoto" src="./assets/img/hangman11.png" alt="no photo found"
                         transition-duration="2s" class="center">
                 </div>
             </div>
 
             <div class="row justify-content-start">
-                <div class="col-sm animated zoomInLeft delay-0s" style="background-color: black;" id="gameStatus">
+                <div class="col-sm animated zoomInRight delay-0s" style="background-color: black;" id="gameStatus">
                     <form>
                         <div class="form-group">
                             <label for="composerName"></label>
@@ -112,7 +112,7 @@
                     </form>
                     <!-- don't know how to get it to play music on load tried this:  onload="playAudio()" -->
                     <audio src="./assets/audio/BachPartitas.mp3" type="audio/mpeg" id="composerAudio"
-                        autoplay="autoplay" loop="loop">
+                        autoplay="autoplay">
                         <!-- <source src="horse.ogg" type="audio/ogg"> -->
                         <!-- <source src="./assets/audio/BachPartitas.mp3" type="audio/mpeg"> -->
                         Your browser does not support the audio element.
@@ -128,7 +128,7 @@
 
                 </div>
 
-                <div class="col-sm text-light animated zoomInRight delay-0s " style="background-color: black;"
+                <div class="col-sm text-light animated zoomInLeft delay-0s" style="background-color: black;"
                     id=composerClues class="center">
                     Click <strong>Start Game</strong> guess composer's name.<br>
                     You have 30 seconds to live.<br>

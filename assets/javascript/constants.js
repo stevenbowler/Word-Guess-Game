@@ -9,6 +9,7 @@ const gameInstructions =
     "You will be provided additional clues. " +
     "But more clues and time used, means a lower final score.";
 
+
 // form fields accessed
 const composerName = document.getElementById("composerName");
 const composerPhoto = document.getElementById("composerPhoto");
@@ -25,6 +26,8 @@ var gameScore = gameStartScore;
 var hints = 5;
 var gameOn = true;
 var restartYes = false;
+var composerNameGuess = "";
+var notInComposerName = "";
 var gameComposer = "unknown";
 var previousUserInputLength = 0;
 
