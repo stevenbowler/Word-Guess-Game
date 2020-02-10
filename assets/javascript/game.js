@@ -1,6 +1,7 @@
-//unanswered questions:
-//  1. how to playAudio on load, stack overflow suggestions below don't work ... yet
+//unanswered questions 10feb2020:
+//  1. how to playAudio on load, stack overflow suggestions below don't work ... yet, autoplay works on GitHub, not locally
 //  2. how to pauseAudio onclick of youtube iframe embed
+//  3. local youtube embed does not work, only on GitHub
 
 //document.getElementById("composerClues").addEventListener("click", pauseAudio());
 
@@ -74,6 +75,7 @@ handleInterim = (userInput) => {
     if (characterCount >= 11) handleFailure();
 }
 
+
 // called from handleInterim case to fill out the un-guessed section of composerGuess with underscores
 middleString = (stringLength) => {
     underscoreString = "";
@@ -81,15 +83,22 @@ middleString = (stringLength) => {
     return (underscoreString);
 }
 
+
 // called from handleInterim when a valid guess entered is added to the string of good guesses
+//      add the correctly guessed letter chr into the string str at position index
 handleGoodCharacter = (str, index, chr) => {
     if (index > str.length - 1) return str;
     return str.substr(0, index) + chr + str.substr(index + 1);
 }
 
+
 // called from handleInterim when characterCount > 11 i.e. max guesses exceeded
+//      when max guesses exceeded shut everything down, zero everything out, display failure hangman
 handleFailure = () => {
     gameScore = 0;
+    // gameScoreId.attributes.ariaValuenow = Math.round(gameScore / 5).toString();
+    // gameScoreId.style.width = Math.round(gameScore / 5).toString() + "%";
+    gameScoreId.innerHTML = gameScore;
     clearInterval(timerID);
     gameOn = false;
     composerHelp.innerHTML = "Sorry, you blew it, it was: " + gameComposer.charAt(0).toUpperCase() + gameComposer.slice(1);  //str.charAt(0).toUpperCase() + str.slice(1);
