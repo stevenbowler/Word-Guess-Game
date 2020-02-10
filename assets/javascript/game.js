@@ -1,9 +1,13 @@
-//playAudio();
+//unanswered questions:
+//  1. how to playAudio on load, stack overflow suggestions below don't work ... yet
+//  2. how to pauseAudio onclick of youtube iframe embed
 
+//document.getElementById("composerClues").addEventListener("click", pauseAudio());
 
 //document.getElementsByTagName("body").addEventListener("load", playAudio());
 
 // document.getElementById("gameStatus").addEventListener("load", playAudio());
+
 
 // called from user input each time oninput each time user touches key   tieStr.indexOf(caseCompare)
 searchName = () => {
@@ -24,8 +28,10 @@ handleSuccess = () => {
     hangmanPhoto.src = "./assets/img/hangmanSuccess.png";
     animateCSS('#hangmanPhoto', 'tada');
     clearInterval(timerID);
-    pauseAudio();
+    //pauseAudio();
     playVideo();
+    //document.getElementById("ytp-button").addEventListener("click", pauseAudio());
+    //document.getElementById("composerClues").addEventListener("click", pauseAudio());
     //document.getElementById("gameScore").focus();
     gameOn = false;
 
@@ -34,13 +40,15 @@ handleSuccess = () => {
 
 
 
-// called from searchName when oninput with each keystroke but composerName not found yet
+// called from searchName oninput with each keystroke but composerName not matched yet, 
+//      add good guesses to good guess string
+//      add bad guesses to bad guess string
+//      display both good and bad guesses in composerHelp field
 handleInterim = (userInput) => {
     console.log("handleInterim userInput: ", userInput.slice(-1), "index = -1?: ", gameComposer.indexOf(userInput.slice(-1)));
     if (gameComposer.indexOf(userInput.slice(-1)) >= 0) {
         composerNameGuess = handleGoodCharacter(composerNameGuess, gameComposer.indexOf(userInput.slice(-1)), userInput.slice(-1));
         console.log("composerNameGuess: ", composerNameGuess);
-        //return;
     } else {// if char not in composerName
         notInComposerName = notInComposerName + userInput.slice(-1);
         ++characterCount;
@@ -66,23 +74,20 @@ handleInterim = (userInput) => {
     if (characterCount >= 11) handleFailure();
 }
 
-
+// called from handleInterim case to fill out the un-guessed section of composerGuess with underscores
 middleString = (stringLength) => {
     underscoreString = "";
     for (i = 0; i < stringLength; ++i) underscoreString = underscoreString + "_";
     return (underscoreString);
 }
 
+// called from handleInterim when a valid guess entered is added to the string of good guesses
 handleGoodCharacter = (str, index, chr) => {
     if (index > str.length - 1) return str;
     return str.substr(0, index) + chr + str.substr(index + 1);
 }
 
-// handleGoodCharacter = (char) => {
-//     composerNameGuess[gameComposer.indexOf(char)] = char;
-// }
-
-//clean up if failed to either guess in 11 characters or finish in time before score/timer gets to zero
+// called from handleInterim when characterCount > 11 i.e. max guesses exceeded
 handleFailure = () => {
     gameScore = 0;
     clearInterval(timerID);
