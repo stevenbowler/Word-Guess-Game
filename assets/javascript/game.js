@@ -1,5 +1,5 @@
 //unanswered questions 10feb2020:
-//  1. how to playAudio on load, stack overflow suggestions below don't work ... yet, autoplay works on GitHub, not locally
+//  1. how to playAudio on load, stack overflow suggestions below don't work ... yet, autoplay works on GitHub sort of, not locally
 //  2. how to pauseAudio onclick of youtube iframe embed
 //  3. local youtube embed does not work, only on GitHub
 
@@ -71,7 +71,8 @@ handleInterim = (userInput) => {
         case 11: composerHelp.innerHTML = "Hint: " + gameComposer.slice(0, 2) + composerNameGuess.substr(2, composerNameGuess.length - 4) + gameComposer.slice(-2); break;
         default: break;
     }
-    if (notInComposerName !== "") composerHelp.innerHTML = composerHelp.innerHTML + "  Not in Composer name: " + notInComposerName;
+    if (notInComposerName !== "" && (composerHelp.innerHTML.indexOf("Composer")) == -1) composerHelp.innerHTML = composerHelp.innerHTML + "  Not in Composer name: " + notInComposerName;
+    else composerHelp.innerHTML = composerHelp.innerHTML + notInComposerName.slice(-1);
     if (characterCount >= 11) handleFailure();
 }
 
