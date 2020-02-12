@@ -1,0 +1,22 @@
+{
+  "name": "word-guess-game",
+  "version": "1.0.0",
+  "description": "UTA Bootcamp Homework 3",
+  "main": "index.html",
+  "scripts": {
+    "doc": "jsdoc -c jsdoc.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stevenbowler/Word-Guess-Game.git"
+  },
+  "author": "Steven Bowler",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stevenbowler/Word-Guess-Game/issues"
+  },
+  "homepage": "https://github.com/stevenbowler/Word-Guess-Game#readme",
+  "devDependencies": {
+    "jsdoc": "^3.6.3"
+  }
+}

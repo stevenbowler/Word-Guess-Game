@@ -1,3 +1,4 @@
+// @ts-check
 //unanswered questions 10feb2020:
 //  1. how to playAudio on load, stack overflow suggestions below don't work ... yet, autoplay works on GitHub sort of, not locally
 //  2. how to pauseAudio onclick of youtube iframe embed
@@ -10,9 +11,16 @@
 // document.getElementById("gameStatus").addEventListener("load", playAudio());
 
 
-// called from user input each time oninput each time user touches key   tieStr.indexOf(caseCompare)
-searchName = () => {
-    userInput = composerName.value.toLowerCase();
+/**
+ * Called from oninput input event, each time user touches key
+ * @function searchName
+ */
+const searchName = () => {
+    /**
+     * User input assigned in lower case
+     * @type {string}
+     */
+    var userInput = composerName.value.toLowerCase();
     if (!gameOn) { restart(); return; } //after success, any next keystroke restarts game. 
     if (userInput.length < previousUserInputLength) { --previousUserInputLength; return; }// if deleting chars don't update hangman
     else previousUserInputLength = userInput.length;
@@ -23,8 +31,12 @@ searchName = () => {
 }
 
 
-// called from searchName when match to composerName is found
-handleSuccess = () => {
+
+/**
+ * Called from searchName when match to composerName is found
+ * @function handleSuccess
+ */
+const handleSuccess = () => {
     composerHelp.innerHTML = "SUCCESS ... GREAT WORK!";
     hangmanPhoto.src = "./assets/img/hangmanSuccess.png";
     animateCSS('#hangmanPhoto', 'tada');
@@ -39,13 +51,15 @@ handleSuccess = () => {
 }
 
 
-
-
-// called from searchName oninput with each keystroke but composerName not matched yet, 
-//      add good guesses to good guess string
-//      add bad guesses to bad guess string
-//      display both good and bad guesses in composerHelp field
-handleInterim = (userInput) => {
+/**
+ * Called from searchName oninput with each keystroke but composerName not matched yet, 
+ *      add good guesses to good guess string,
+ *      add bad guesses to bad guess string,
+ *      display both good and bad guesses in composerHelp field.
+ *  @function handleInterim
+    @param {string} userInput ... from searchName, user's latest composerName guess
+ */
+const handleInterim = (userInput) => {
     console.log("handleInterim userInput: ", userInput.slice(-1), "index = -1?: ", gameComposer.indexOf(userInput.slice(-1)));
     if (gameComposer.indexOf(userInput.slice(-1)) >= 0) {
         composerNameGuess = handleGoodCharacter(composerNameGuess, gameComposer.indexOf(userInput.slice(-1)), userInput.slice(-1));
@@ -77,25 +91,41 @@ handleInterim = (userInput) => {
 }
 
 
-// called from handleInterim case to fill out the un-guessed section of composerGuess with underscores
-middleString = (stringLength) => {
-    underscoreString = "";
-    for (i = 0; i < stringLength; ++i) underscoreString = underscoreString + "_";
+/**
+ * Called from handleInterim case to fill out the un-guessed section of composerGuess with underscores
+ * @function middleString
+ * @param {number} stringLength  Build a string of underscores to fill the spaces in composerGuess field
+ * @returns {string} of underscores of stringLength
+ */
+const middleString = (stringLength) => {
+    /**
+     * @type {string}
+     */
+    var underscoreString = "";
+    for (var i = 0; i < stringLength; ++i) underscoreString = underscoreString + "_";
     return (underscoreString);
 }
 
-
-// called from handleInterim when a valid guess entered is added to the string of good guesses
-//      add the correctly guessed letter chr into the string str at position index
-handleGoodCharacter = (str, index, chr) => {
+/**
+ * Called from handleInterim when a valid guess entered is added to the string of good guesses,
+ *          add the correctly guessed letter chr into the string str at position index.
+ * @function handleGoodCharacter
+ * @param {string} str String to have chr inserted at index
+ * @param {number} index Location to insert chr
+ * @param {string} chr Character to be inserted, last in string userInput from searchName
+ * @returns {string} with chr inserted in str at index
+ */
+const handleGoodCharacter = (str, index, chr) => {
     if (index > str.length - 1) return str;
     return str.substr(0, index) + chr + str.substr(index + 1);
 }
 
-
-// called from handleInterim when characterCount > 11 i.e. max guesses exceeded
-//      when max guesses exceeded shut everything down, zero everything out, display failure hangman
-handleFailure = () => {
+/** 
+ * Called from handleInterim when characterCount > 11 i.e. max guesses exceeded,
+ *      when max guesses exceeded shut everything down, zero everything out, display failure hangman
+ * @function handleFailure
+ * */
+const handleFailure = () => {
     gameScore = 0;
     // gameScoreId.attributes.ariaValuenow = Math.round(gameScore / 5).toString();
     // gameScoreId.style.width = Math.round(gameScore / 5).toString() + "%";
@@ -107,9 +137,11 @@ handleFailure = () => {
     animateCSS('#hangmanPhoto', 'shake');
 }
 
-
-// called from 3 places: navbar start, start game button, or from composerName field oninput after success
-restart = () => {
+/** 
+ * Called from 3 places: navbar start, start game button, or from composerName field oninput after success
+ * @function restart
+*/
+const restart = () => {
     gameOn = true;
     characterCount = 0;
     previousUserInputLength = 0;
@@ -129,9 +161,10 @@ restart = () => {
     console.log("restart");
 }
 
-
-// called from the one second timerID within restart()
-updateScore = () => {
+/** Called from the one second timerID within restart()
+ * @function updateScore
+ */
+const updateScore = () => {
     if (characterCount == 0) gameScore = gameScore - hints;
     gameScore = gameScore - (hints * characterCount); // score drops faster if user uses more characters
     gameScoreId.innerHTML = gameScore;
@@ -140,12 +173,15 @@ updateScore = () => {
     if (gameScore <= 0) handleFailure();
 }
 
-
-// called from restart() to update the image of the hangman
-updateHangman = (count) => {
+/** 
+ * Called from restart() and handleInterim to update the image of the hangman to latest guess count
+ * @function updateHangman
+ * @param {number} count  Used to index to image files for corresponding guess
+*/
+const updateHangman = (count) => {
     if (count >= maxCharacters) handleFailure();
     else {
-        imageURL = "./assets/img/hangman" + count.toString() + ".png";
+        var imageURL = "./assets/img/hangman" + count.toString() + ".png";
         // if restart then zoom out old zoom in new
         if (count == 0) animateCSS('#hangmanPhoto', 'zoomOutLeft', function () {
             hangmanPhoto.src = imageURL;
@@ -159,8 +195,10 @@ updateHangman = (count) => {
     }
 }
 
-// called from restart to choose a new composer from the array of 15 composers
-chooseComposer = () => {
+/** Called from restart to choose a new composer from the array of 15 composers
+ * @function chooseComposer
+*/
+const chooseComposer = () => {
     composerIndex = parseInt(Math.random() * 17);
     console.log("random choice of Composer:  ", composerArray[composerIndex].lastName);
     gameComposer = composerArray[composerIndex].lastName;
@@ -175,23 +213,40 @@ chooseComposer = () => {
     playAudio();
 }
 
-
-playAudio = () => {
+/** 
+ * Called from restart() or from play music button on home screen
+ * @function playAudio
+ */
+const playAudio = () => {
     composerAudio.play();
 }
 
-pauseAudio = () => {
+/** 
+ * Called from pause music button on home screen
+ * @function pauseAudio
+ */
+const pauseAudio = () => {
     composerAudio.pause();
 }
 
-playVideo = () => {
+/**
+ * Called from handleSuccess when composerName found offers youtube video in composerClues div on home screen
+ */
+const playVideo = () => {
     composerClues.innerHTML = gameComposerVideo;
     animateCSS('#composerClues', 'zoomInRight');
 }
 
-
-// from GitHub animate.css library
-animateCSS = (element, animationName, callback) => {
+/**
+ * Called from various points to animate unload load of content in divs,
+ *      from GitHub animate.css library
+ * @async
+ * @function animateCSS
+ * @param {*} element div id/class/tag to be modified
+ * @param {*} animationName from list of animateCSS classes
+ * @param {*} [callback] required if unloading before loading div with content, async
+ */
+const animateCSS = (element, animationName, callback) => {
     const node = document.querySelector(element)
     node.classList.add('animated', animationName)
 

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: constants.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: constants.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * master list of composerNames included in this game
+ * @constant
+ * @type {Array&lt;string>}
+ * @default
+ */
+const composerNames = ["beethoven", "mozart", "bach", "wagner", "haydn", "brahms", "schubert", "schumann", "debussy", "handel", "vivaldi", "chopin", "dvorak", "mendelssohn", "stravinsky", "verdi", "strauss"];
+
+/**
+ * Maximum number of bad letter guesses
+ * @constant
+ * @type {number}
+ * @default
+ */
+const maxCharacters = 11;
+
+/**
+ * Starting score for game, goes down with more time and bad guesses
+ * @constant
+ * @type {number}
+ * @default
+ */
+const gameStartScore = 500;
+
+/**
+ * User instructions before game start
+ * @constant
+ * @type {string}
+ * @default
+ */
+const gameInstructions =
+    "Click &lt;strong>Start Game&lt;/strong> guess composer's name.  " +
+    "You have 30 seconds to live. " +
+    "Or, get hung with 11 bad guesses. " +
+    "Whichever comes first. " +
+    "You will be provided additional clues. " +
+    "But more clues and time used, means a lower final score.";
+
+
+// aliases for html form fields accessed
+/**
+ * Alias for id=composerName getElement
+ * @constant
+ * @type {string}
+ * @default
+ */
+const composerName = document.getElementById("composerName");
+
+/**
+ * Alias for id=composerPhoto getElement
+ * @constant
+ * @type {string}
+ * @default
+ */
+const composerPhoto = document.getElementById("composerPhoto");
+
+/**
+ * Alias for id=composerHelp getElement
+ * @constant
+ * @type {string}
+ * @default
+ */
+const composerHelp = document.getElementById("composerHelp");
+
+/**
+ * Alias for id=hangmanPhoto getElement
+ * @constant
+ * @type {string}
+ * @default
+ */
+const hangmanPhoto = document.getElementById("hangmanPhoto");
+
+/**
+ * Alias for id=composerClues getElement
+ * @constant
+ * @type {string}
+ * @default
+ */
+const composerClues = document.getElementById("composerClues");
+
+/**
+ * Alias for id=gameScoreId getElement
+ * @constant
+ * @type {string}
+ * @default
+ */
+const gameScoreId = document.getElementById("gameScore");
+
+/**
+ * Alias for id=composerAudio getElement
+ * @constant
+ * @type {string}
+ * @default
+ */
+const composerAudio = document.getElementById("composerAudio");
+
+/**
+ * Constant fun
+ * @constant
+ * @type {string}
+ * @default
+ */
+const backSpace = 8;
+
+/**
+ * Count of bad guesses 
+ * @type {number}
+ */
+var characterCount = 0;
+
+/**
+ * Score for current game starts = gameStartScore 
+ * @type {number}
+ */
+var gameScore = gameStartScore;
+
+/**
+ * Count of hints allowed, not currently used 
+ * @type {number}
+ */
+var hints = 5;
+
+/**
+ * gameOn or off to disable clock and score updates
+ * @type {boolean}
+ */
+var gameOn = true;
+
+/**
+ * Count of hints allowed, not currently used 
+ * @type {boolean}
+ */
+var restartYes = false;
+
+/**
+ * Current full name guess from user
+ * @type {string}
+ */
+var composerNameGuess = "";
+
+/**
+ * Each erroneous character guess is concatenated to this string then displayed to user
+ * @type {number}
+ */
+
+var notInComposerName = "";
+
+/**
+ * Initialize randomly selected gameComposer Name to unknown
+ * @type {string}
+ */
+var gameComposer = "unknown";
+
+/**
+ * Used in seachName to determine if current userInput different from previous userInput
+ * @type {number}
+ */
+var previousUserInputLength = 0;
+
+/**
+ * Randomly selected composer index used to reference name and video embed string,
+ *      could be used to add other elements to link in to game for the same composer
+ * @type {number}
+ */
+var composerIndex = 0;
+
+/**
+ * Once composerIndex randomly selected this is set to correct composer video string 
+ * @type {string}
+ */
+var gameComposerVideo = "";
+
+/**
+ * Composer names and associated embed youtube videos 
+ * @type {Array&lt;object>}
+ */
+var composerArray = [
+    { lastName: "bach", video: '&lt;iframe src="https://www.youtube.com/embed/6JQm5aSjX6g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>&lt;/iframe>' },
+    { lastName: "mozart", video: '&lt;iframe src="https://www.youtube.com/embed/Rb0UmrCXxVA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>&lt;/iframe>' },
+    { lastName: "debussy", video: '&lt;iframe src="https://www.youtube.com/embed/OUx6ZY60uiI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>&lt;/iframe>' },
+    { lastName: "beethoven", video: '&lt;iframe src="https://www.youtube.com/embed/QkQapdgAa7o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>&lt;/iframe>' },
+    { lastName: "strauss", video: '&lt;iframe src="https://www.youtube.com/embed/d4AmYBhGBfM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>&lt;/iframe>' },
+    { lastName: "dvorak", video: '&lt;iframe src="https://www.youtube.com/embed/3nSEMJW7UqE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>&lt;/iframe>' },
+    { lastName: "mendelssohn", video: '&lt;iframe src="https://www.youtube.com/embed/sWiCHa9DFOY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>&lt;/iframe>' },
+    { lastName: "brahms", video: '&lt;iframe src="https://www.youtube.com/embed/zKrxesI3ziE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>&lt;/iframe>' },
+    { lastName: "haydn", video: '&lt;iframe src="https://www.youtube.com/embed/EmZF3kBZQ6E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>&lt;/iframe>' },
+    { lastName: "schubert", video: '&lt;iframe src="https://www.youtube.com/embed/iiChxN0T2kA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>&lt;/iframe>' },
+    { lastName: "vivaldi", video: '&lt;iframe src="https://www.youtube.com/embed/O6NRLYUThrY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>&lt;/iframe>' },
+    { lastName: "chopin", video: '&lt;iframe src="https://www.youtube.com/embed/wygy721nzRc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>&lt;/iframe>' },
+    { lastName: "stravinsky", video: '&lt;iframe src="https://www.youtube.com/embed/ne4PoC7V0Mk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>&lt;/iframe>' },
+    { lastName: "handel", video: '&lt;iframe src="https://www.youtube.com/embed/joVkx20oVIg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>&lt;/iframe>' },
+    { lastName: "wagner", video: '&lt;iframe src="https://www.youtube.com/embed/4i0TnNI6U-w" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>&lt;/iframe>' },
+    { lastName: "verdi", video: '&lt;iframe src="https://www.youtube.com/embed/P6sz5b2w9Zc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>&lt;/iframe>' },
+    { lastName: "schumann", video: '&lt;iframe src="https://www.youtube.com/embed/QqEWbOzL_GQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>&lt;/iframe>' }
+];
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Word Guess Game</a></h2><h3>Global</h3><ul><li><a href="global.html#animateCSS">animateCSS</a></li><li><a href="global.html#backSpace">backSpace</a></li><li><a href="global.html#characterCount">characterCount</a></li><li><a href="global.html#chooseComposer">chooseComposer</a></li><li><a href="global.html#composerArray">composerArray</a></li><li><a href="global.html#composerAudio">composerAudio</a></li><li><a href="global.html#composerClues">composerClues</a></li><li><a href="global.html#composerHelp">composerHelp</a></li><li><a href="global.html#composerIndex">composerIndex</a></li><li><a href="global.html#composerName">composerName</a></li><li><a href="global.html#composerNameGuess">composerNameGuess</a></li><li><a href="global.html#composerNames">composerNames</a></li><li><a href="global.html#composerPhoto">composerPhoto</a></li><li><a href="global.html#gameComposer">gameComposer</a></li><li><a href="global.html#gameComposerVideo">gameComposerVideo</a></li><li><a href="global.html#gameInstructions">gameInstructions</a></li><li><a href="global.html#gameOn">gameOn</a></li><li><a href="global.html#gameScore">gameScore</a></li><li><a href="global.html#gameScoreId">gameScoreId</a></li><li><a href="global.html#gameStartScore">gameStartScore</a></li><li><a href="global.html#handleFailure">handleFailure</a></li><li><a href="global.html#handleGoodCharacter">handleGoodCharacter</a></li><li><a href="global.html#handleInterim">handleInterim</a></li><li><a href="global.html#handleSuccess">handleSuccess</a></li><li><a href="global.html#hangmanPhoto">hangmanPhoto</a></li><li><a href="global.html#hints">hints</a></li><li><a href="global.html#maxCharacters">maxCharacters</a></li><li><a href="global.html#middleString">middleString</a></li><li><a href="global.html#notInComposerName">notInComposerName</a></li><li><a href="global.html#pauseAudio">pauseAudio</a></li><li><a href="global.html#playAudio">playAudio</a></li><li><a href="global.html#playVideo">playVideo</a></li><li><a href="global.html#previousUserInputLength">previousUserInputLength</a></li><li><a href="global.html#restart">restart</a></li><li><a href="global.html#restartYes">restartYes</a></li><li><a href="global.html#searchName">searchName</a></li><li><a href="global.html#updateHangman">updateHangman</a></li><li><a href="global.html#updateScore">updateScore</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Wed Feb 12 2020 10:19:46 GMT-0600 (Central Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
