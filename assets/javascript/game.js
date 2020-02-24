@@ -6,10 +6,19 @@
 
 //document.getElementById("composerClues").addEventListener("click", pauseAudio());
 
-//document.getElementsByTagName("body").addEventListener("load", playAudio());
+//document.getElementsByTagName("body").addEventListener("load", startup());
 
-// document.getElementById("gameStatus").addEventListener("load", playAudio());
+// document.getElementById("gameStatus").addEventListener("load", startup());
 
+// const startup = () => {
+//     timerIDmusic = setInterval(
+//         () => playAudio(),
+//         1000);
+// }
+
+// const shutdown = () => {
+//     clearInterval(timerIDmusic);
+// }
 
 /**
  * Called from oninput input event, each time user touches key

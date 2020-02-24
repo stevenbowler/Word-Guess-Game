@@ -41,7 +41,7 @@ const gameInstructions =
 /**
  * Alias for id=composerName getElement
  * @constant
- * @type {string}
+ * @type {HTMLElement}
  * @default
  */
 const composerName = document.getElementById("composerName");
@@ -49,7 +49,7 @@ const composerName = document.getElementById("composerName");
 /**
  * Alias for id=composerPhoto getElement
  * @constant
- * @type {string}
+ * @type {HTMLElement}
  * @default
  */
 const composerPhoto = document.getElementById("composerPhoto");
@@ -57,7 +57,7 @@ const composerPhoto = document.getElementById("composerPhoto");
 /**
  * Alias for id=composerHelp getElement
  * @constant
- * @type {string}
+ * @type {HTMLElement}
  * @default
  */
 const composerHelp = document.getElementById("composerHelp");
@@ -65,7 +65,7 @@ const composerHelp = document.getElementById("composerHelp");
 /**
  * Alias for id=hangmanPhoto getElement
  * @constant
- * @type {string}
+ * @type {HTMLElement}
  * @default
  */
 const hangmanPhoto = document.getElementById("hangmanPhoto");
@@ -73,7 +73,7 @@ const hangmanPhoto = document.getElementById("hangmanPhoto");
 /**
  * Alias for id=composerClues getElement
  * @constant
- * @type {string}
+ * @type {HTMLElement}
  * @default
  */
 const composerClues = document.getElementById("composerClues");
@@ -81,7 +81,7 @@ const composerClues = document.getElementById("composerClues");
 /**
  * Alias for id=gameScoreId getElement
  * @constant
- * @type {string}
+ * @type {HTMLElement}
  * @default
  */
 const gameScoreId = document.getElementById("gameScore");
@@ -89,7 +89,7 @@ const gameScoreId = document.getElementById("gameScore");
 /**
  * Alias for id=composerAudio getElement
  * @constant
- * @type {string}
+ * @type {HTMLElement}
  * @default
  */
 const composerAudio = document.getElementById("composerAudio");
@@ -172,7 +172,7 @@ var gameComposerVideo = "";
 
 /**
  * Composer names and associated embed youtube videos 
- * @type {Array<object>}
+ * @type {Array<{lastName:string, video: string}>}
  */
 var composerArray = [
     { lastName: "bach", video: '<iframe src="https://www.youtube.com/embed/6JQm5aSjX6g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' },
